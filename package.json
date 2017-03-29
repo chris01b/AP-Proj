@@ -1,6 +1,6 @@
 {
   "name": "ap-proj",
-  "version": "0.0.1"
+  "version": "0.0.1",
   "description": "Display road data while driving",
   "private": true,
   "engines": {
