@@ -1,17 +1,13 @@
 {
   "name": "ap-proj",
-  
-  "version": "0.0.1",
-  
+  "version": "0.0.1"
   "description": "Display road data while driving",
-  
-  "main": "app.js",
-  
+  "private": true,
   "engines": {
     "node": ">=4.6.0"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -25,9 +21,14 @@
     "url": "https://github.com/chris01b/AP-Proj/issues"
   },
   "homepage": "https://github.com/chris01b/AP-Proj#readme",
-  
   "dependencies": {
-    "express": "^4.15.2",
-    "pug": "^2.0.0-beta11"
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "morgan": "~1.7.0",
+    "node-sass-middleware": "0.9.8",
+    "pug": "~2.0.0-beta10",
+    "serve-favicon": "~2.3.2"
   }
 }
