@@ -11,9 +11,12 @@
     "url": "git+https://github.com/chris01b/AP-Proj.git"
   },
   "author": "",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/chris01b/AP-Proj/issues"
   },
-  "homepage": "https://github.com/chris01b/AP-Proj#readme"
+  "homepage": "https://github.com/chris01b/AP-Proj#readme",
+  "dependencies": {
+    "request": "^2.81.0"
+  }
 }
