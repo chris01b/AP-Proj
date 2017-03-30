@@ -1,0 +1,19 @@
+{
+  "name": "ap-proj.data",
+  "version": "0.0.1",
+  "description": "Data section",
+  "main": "getData.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris01b/AP-Proj.git"
+  },
+  "author": "",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/chris01b/AP-Proj/issues"
+  },
+  "homepage": "https://github.com/chris01b/AP-Proj#readme"
+}
