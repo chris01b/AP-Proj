@@ -7,11 +7,17 @@ var exports = module.exports = {};
 exports.getElevation = function(lat, long, APIkey) {
     var requestURL = baseURL + '?locations=' + lat + ',' + long + '&key=' + APIkey;
     
-    console.log(requestURL);
-    
     request(requestURL, function (error, response, body) {
-    console.log('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', body); // Print the HTML for the Google homepage.
+        var parsedBody = JSON.parse(body);
+        
+    	if (error) {
+    	    console.error(' request error:', error);
+    	}
+    	if (parsedBody.status !== 'OK') {
+    	    console.log('error:', parsedBody.status + ':', parsedBody.error_message);
+    	}
+    	else {
+    	    console.log(body);
+    	}
     });
 };
