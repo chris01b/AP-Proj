@@ -6,10 +6,11 @@ if (navigator.geolocation) {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     };
-    
+    console.log(pos.lat, pos.lng);
+
   }, function(err) {
       console.error(err);
   });
 } else {
-  // Browser doesn't support Geolocation
+  console.log('Browser doesn\'t support Geolocation'); // Browser doesn't support Geolocation
 }
