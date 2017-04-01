@@ -1,0 +1,32 @@
+/**
+ * Import the Roboto Google Fonts
+ */
+@import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono|Roboto+Slab');
+
+/**
+ * Variables
+ */
+$roboto: 'Roboto', sans-serif;
+$roboto-slab: 'Roboto Slab', serif;
+$roboto-mono: 'Roboto Mono', monospace;
+
+/**
+ * Styles
+ */
+body {
+    padding: 50px;
+    font-family: $roboto;
+    font-size: 14px;
+    
+    h {
+        font-family: $roboto-slab;
+    }
+}
+
+a {
+    color: #00B7FF;
+}
+
+.data {
+    font-family: $roboto-mono;
+}
