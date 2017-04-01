@@ -1,7 +1,13 @@
 {
   "name": "ap-proj",
-  "version": "0.0.0",
+  "description": "Display road data while driving",
+  "version": "0.0.1",
   "private": true,
+  "license": "GPL-3.0",
+  "author": "chris01b",
+  "engines": {
+    "node": ">=6.9.2"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },

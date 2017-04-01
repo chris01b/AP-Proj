@@ -1,4 +1,7 @@
-// TAKEN FROM https://developers.google.com/maps/documentation/javascript/geolocation
+/**
+ * TAKEN FROM https://developers.google.com/maps/documentation/javascript/geolocation
+ */
+
 var socket = io.connect(location.origin);
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(function(position) {
@@ -10,6 +13,11 @@ if (navigator.geolocation) {
     // We want to send pos
     socket.on('sendpls', function() {
       socket.emit('coords', pos);
+    });
+    socket.on('elevation', function(elevation) {
+        $(document).ready(function() {
+          $('#elevationID').text(elevation);
+        });
     });
     
   }, function(err) {

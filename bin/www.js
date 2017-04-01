@@ -113,6 +113,7 @@ io.on('connection', function (socket) {
     getData.getElevation(data.lat, data.lng, APIkey, function(err, elevation) {
         if (err) console.error(err);
         console.log(elevation);
+        socket.emit('elevation', elevation);
     });
   });
 });
