@@ -17,13 +17,14 @@ module.exports = {
         });
     },
 
-    getSpeedLimit: function(path, APIkey) {
-        var requestURL = baseURL + '?path=' + lat + ',' + long + '&key=' + APIkey;
+    // Currently just returns the body of the response. TBA: return just the speed limit
+    getSpeedLimit: function(lat, long, APIkey, callback) {
+        var requestURL = baseRoadsURL + '?path=' + lat + ',' + long + '&key=' + APIkey;
         request(requestURL, function (err, response, body) {
             var pbody = JSON.parse(body);
             if (err) console.error('request error:', err);
             else {
-                callback('warning' + ':' + pbody.warningMessage, pbody.speedLimits[0].speedLimit);
+                callback(body);
             }   
         });
     }
