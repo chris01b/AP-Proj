@@ -10,12 +10,6 @@ var http = require('http');
 var getData = require('../getData')
 
 /**
- * Google Maps API Key
- */
-
-const APIkey = 'AIzaSyDJUarszRbkOE-7jmdWmU9SKEKduoLFxYY';
-
-/**
  * Get port from environment and store in Express.
  */
 
@@ -110,7 +104,7 @@ io.on('connection', function (socket) {
     console.log('A user connected');
     socket.on('coords', function (data) {
         // At this point, we will execute getData.js on the location and then return it
-        getData.getElevation(data.lat, data.lng, APIkey, function(err, elevation) {
+        getData.getElevation(data.lat, data.lng, function(err, elevation) {
             if (err) console.error(err);
             console.log(elevation);
             socket.emit('elevation', elevation);
