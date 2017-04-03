@@ -11,7 +11,7 @@ module.exports = {
             }
         }, function(err, response) {
             if (err) {
-                callback(err, null)
+                callback(err, null);
             } else if (response.json.status !== 'OK') {
                 callback(response.json.status + ':' + response.json.error_message, null);
             } else {

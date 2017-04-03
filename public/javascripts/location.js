@@ -19,7 +19,7 @@ function doLocation() {
         
         socket.on('elevation', function(elevation) {
             $(document).ready(function() {
-                $('#elevationID').text(elevation + ' meters');
+                $('#elevationID').text(elevation.toFixed(0) + ' meters');
             });
         });
         
