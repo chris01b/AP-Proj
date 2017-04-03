@@ -12,6 +12,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@google-cloud/debug-agent": "^1.0.0",
     "@google/maps": "^0.3.1",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
