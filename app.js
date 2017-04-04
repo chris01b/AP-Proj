@@ -3,6 +3,7 @@
  */
 
 // Import the express module
+/*eslint-disable no-unused-params */
 var express = require('express');
 // Import the path module
 var path = require('path');
@@ -44,14 +45,20 @@ app.use(express.static(path.join(__dirname, 'public')));    // Needs the path mo
 // use the imported index route for the root directory
 app.use('/', index);
 
-// catch 404 and forward to error handler
+/**
+ * Catch 404 and forward to error handler
+ */
+
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
+/**
+ * Error handler
+ */
+
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
