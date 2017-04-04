@@ -1,4 +1,3 @@
-service: ap-proj
 runtime: nodejs
 env: flex
 manual_scaling:

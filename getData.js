@@ -1,8 +1,14 @@
+/**
+ * The API key for the Google Maps API
+ */
 var googleMapsClient = require('@google/maps').createClient({
     key: 'AIzaSyDJUarszRbkOE-7jmdWmU9SKEKduoLFxYY'
 });
 
-module.exports = {
+module.exports = { // Anything in this object will be exported
+    /**
+     * Input coordinates to return a function containing an optional error and elevation
+     */
     getElevation: function(lat, lng, callback) {
         googleMapsClient.elevation({
             locations: {
