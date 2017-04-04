@@ -1,33 +1,47 @@
+/**
+ * Imports
+ */
+
+// Import the express module
 var express = require('express');
+// Import the path module
 var path = require('path');
-var favicon = require('serve-favicon');
+// Import the morgan module as logger
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+// Import the node sass middleware module
 var sassMiddleware = require('node-sass-middleware');
 
+// Import the index route for traffic to the main page
 var index = require('./routes/index');
 
+// Create a variable 'app' that runs the express module
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+/**
+ * View engine setup
+ */
+
+// Sets the directory for the applications views to be in the views directory
+app.set('views', path.join(__dirname, 'views'));    // Needs the path module in order
+                                                    // to get the current directory name
+// Sets the rendering engine to be pug
 app.set('view engine', 'pug');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// Outputs logs of the method used for the request, its url,
+// status, response time, and length of the response
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// Use sass stylesheets
 app.use(sassMiddleware({
-  src: path.join(__dirname, 'public'),
-  dest: path.join(__dirname, 'public'),
-  indentedSyntax: false, // true = .sass and false = .scss
-  sourceMap: true
+  src: path.join(__dirname, 'public'), // set the input of the scss files to the public folder
+  dest: path.join(__dirname, 'public'), // set the input of the css files to the public folder
+  indentedSyntax: false, // set the syntax to scss - not sass
+  sourceMap: true // create a source map file that allows browsers to link the scss and css files
 }));
-app.use(express.static(path.join(__dirname, 'public')));
+// Set the static assets directory to be the public folder
+app.use(express.static(path.join(__dirname, 'public')));    // Needs the path module in order
+                                                            // to get the current directory name
 
+// use the imported index route for the root directory
 app.use('/', index);
 
 // catch 404 and forward to error handler

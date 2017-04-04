@@ -1,4 +1,9 @@
+# Make sure google knows this is a nodejs program
 runtime: nodejs
+
+# Node js programs can only run in a flexible enviroment with no set specs
 env: flex
+
+# We only want one machine to have the program because not many requests are being made
 manual_scaling:
     instances: 1
