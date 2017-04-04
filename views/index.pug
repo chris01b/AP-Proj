@@ -1,13 +1,21 @@
 extends layout
 
 block scripts
+    // Import the socket.io library
     script(src='/socket.io/socket.io.js')
+    // Import the location library to emit the location and retrive the elevation
     script(src='/javascripts/location.js')
+    // Import the jquery library
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
 
 block content
-    h1= title
-    p Welcome to #{title}
+    // Display a header 1 called GPS Tool
+    h1 GPS Tool
+    // Display a welcome message
+    p Welcome to GPS Tool
+    // Create a new line
     br
+    // Display a header 2 called Elevation
     h2 Elevation:
+    // Create a Loading text with an class of data and id of elevationID
     p.data#elevationID Loading...

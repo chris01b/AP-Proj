@@ -1,6 +1,9 @@
 extends layout
 
 block content
+    // Create a header 1 with the error message
     h1= message
+    // Create a header 2 with the error status
     h2= error.status
+    // Put the error stack in a pre tag to hold its format
     pre #{error.stack}

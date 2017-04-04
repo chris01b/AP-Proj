@@ -7,3 +7,9 @@ env: flex
 # We only want one machine to have the program because not many requests are being made
 manual_scaling:
     instances: 1
+
+env_variables:
+    # Set the port to run on to be HTTPS
+    PORT: 443
+    # Set the enviroment to be in production mode
+    NODE_ENV: 'production'

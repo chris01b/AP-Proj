@@ -50,9 +50,12 @@ app.use('/', index);
  */
 
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    // Create an error object called 'Not Found'
+    var err = new Error('Not Found');
+    // Make the status of the object 404
+    err.status = 404;
+    // Pass the error object the error handler
+    next(err);
 });
 
 /**
@@ -60,13 +63,17 @@ app.use(function(req, res, next) {
  */
 
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // Set the local message to be the error message
   res.locals.message = err.message;
+  // Set the local error to be the error object if it is in development, otherwise
+  // set it to an empty object
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Set the error status to be the provided one or if there is none, 500
   res.status(err.status || 500);
+  // Load the error.pug file in the views folder
   res.render('error');
 });
 
+// Export the app object
 module.exports = app;

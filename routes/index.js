@@ -1,9 +1,15 @@
+// Import express module
 var express = require('express');
+// Set router as the express router
 var router = express.Router();
 
-/* GET home page. */
+/**
+ * Render the index.pug file for the root page
+ */
+
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'GPS Tool' });
+    res.render('index');
 });
 
+// Export the router object
 module.exports = router;
