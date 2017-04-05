@@ -18,6 +18,10 @@ var index = require('./routes/index');
 // Create a variable 'app' that runs the express module
 var app = express();
 
+// If the enviroment variable NODE_ENV is development,
+// set development to true, otherwise false
+var development = process.env.NODE_ENV === 'development' ? true : false;
+
 /**
  * View engine setup
  */
@@ -29,8 +33,10 @@ app.set('views', path.join(__dirname, 'views'));    // Needs the path module in 
 app.set('view engine', 'pug');
 
 // Outputs logs of the method used for the request, its url,
-// status, response time, and length of the response
-app.use(logger('dev'));
+// status, response time, and length of the response if in development mode
+if (development === true) {
+    app.use(logger('dev'));
+}
 // Use sass stylesheets
 app.use(sassMiddleware({
   src: path.join(__dirname, 'public'), // set the input of the scss files to the public folder

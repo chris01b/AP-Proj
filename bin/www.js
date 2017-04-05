@@ -27,10 +27,13 @@ app.set('port', port);
  * Show debug info if in a development enviroment
  */
 // If the enviroment variable NODE_ENV is development,
-// turn on debug info for ap-proj:server
+// set development to true, otherwise false
 if (process.env.NODE_ENV === 'development') {
+    var development = true;
+    // Turn on debug info for ap-proj:server
     process.env.DEBUG = 'ap-proj:server';
 } else {
+    var development = false;
     // Otherwise, don't display debug info
     process.env.DEBUG = '';
 }
@@ -137,8 +140,12 @@ function onListening() {
 // When the server connects to the client run the function and pass
 // socket as the specific client
 io.on('connection', function(socket) {
+    // sets userIP to be the socket's remote address
+    var userIP = socket.request.connection.remoteAddress;
     // Output that a user connected
-    console.log('A user connected');
+    if (development === true) {
+        console.log('A user connected from', userIP);
+    }
     // When the user emits the coords event, pass a function with
     // the variable data as the data it receives
     socket.on('coords', function(data) {
@@ -147,8 +154,10 @@ io.on('connection', function(socket) {
         getData.getElevation(data.lat, data.lng, function(err, elevation) {
             // Output the error if there is one
             if (err) console.error(err);
-            // Output the elevation
-            console.log(elevation);
+            // Output the elevation if in dev mode
+            if (development === true) {
+                console.log(elevation + ' from ' + userIP);
+            }
             // Emit an elevation event with the location's elevation to the client
             socket.emit('elevation', elevation);
         });
