@@ -12,7 +12,7 @@ function doLocation() {
             lat: position.coords.latitude,
             lng: position.coords.longitude
         };
-        console.log(pos); // CURRENTLY NOT SENDING!!! PLS FIX!
+        console.log(pos);
         
         // send pos
         socket.emit('coords', pos);

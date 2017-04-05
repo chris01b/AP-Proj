@@ -8,8 +8,6 @@
 var http = require('http');
 // Import debug module for logs
 var debug = require('debug')('ap-proj:server');
-// Import socket.io for communicating with the client
-var io = require('socket.io')(server);
 // Import the app function from app.js
 var app = require('../app');
 // Import the getData module from getData.js
@@ -44,6 +42,9 @@ if (process.env.NODE_ENV === 'development') {
 // Define server as the http server with the app from app.js
 // as the listener for requests and responses
 var server = http.createServer(app);
+
+// Import socket.io for communicating with the client
+var io = require('socket.io')(server);
 
 /**
  * Listen on provided port, on all network interfaces.
