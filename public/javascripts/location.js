@@ -19,8 +19,8 @@ function doLocation() {
         // Log the location object in the browser
         console.log(pos);
         
-        // Emit the location to the server as a coords event
-        socket.emit('coords', pos);
+        // Emit the location to the server as a location event
+        socket.emit('location', null, pos);
         
         // Pass the elevation when receiving the elevation event
         socket.on('elevation', function(elevation) {
@@ -32,8 +32,8 @@ function doLocation() {
         });
         
     }, function(err) {
-        // If there is an error, log it in browser
-        console.error(err);
+        // Otherwise, emit the error to the location event
+        socket.emit('location', err, null);
     });
 }
 
@@ -41,6 +41,6 @@ function doLocation() {
 if (navigator.geolocation) {
     setInterval(doLocation, 2000);
 } else {
-    // Otherwise, log in the browser that it doesn't support geolocation
-    console.log('Browser doesn\'t support Geolocation');
+    // Otherwise, emit an error to the location event that it doesn't support geolocation
+    socket.emit('location', 'Browser doesn\'t support Geolocation', null);
 }

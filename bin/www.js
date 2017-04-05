@@ -146,12 +146,14 @@ io.on('connection', function(socket) {
     if (development === true) {
         console.log('A user connected from', userIP);
     }
-    // When the user emits the coords event, pass a function with
+    // When the user emits the location event, pass a function with
     // the variable data as the data it receives
-    socket.on('coords', function(data) {
+    socket.on('location', function(err, pos) {
+        // Output the error if there is one
+        if (err) console.error(err);
         // Execute getData.js on the location received and pass a function
         // containg an error and the location's elevation variable
-        getData.getElevation(data.lat, data.lng, function(err, elevation) {
+        getData.getElevation(pos.lat, pos.lng, function(err, elevation) {
             // Output the error if there is one
             if (err) console.error(err);
             // Output the elevation if in dev mode
