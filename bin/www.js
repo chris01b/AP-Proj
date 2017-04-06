@@ -4,6 +4,17 @@
  * Module dependencies.
  */
 
+// Require and start in the startup of your application:
+require('@google-cloud/debug-agent').start({ allowExpressions: true });
+// No auth necessary if your code is running on Google Cloud Platform.
+
+// ... or, if you are running elsewhere, you can manually provide credentials:
+require('@google-cloud/debug-agent').start({
+  allowExpressions: true,
+  projectId: 'key-line-138323',
+  keyFilename: 'googleKey.json'
+});
+
 // Import the http module
 var http = require('http');
 // Import debug module for logs

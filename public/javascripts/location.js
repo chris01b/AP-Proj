@@ -1,5 +1,4 @@
 /*eslint-env jquery */
-/*globals io */
 
 // Import the socket as the address of the server
 var socket = io.connect(location.origin);
