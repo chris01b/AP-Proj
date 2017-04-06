@@ -28,12 +28,13 @@ app.set('port', port);
  */
 // If the enviroment variable NODE_ENV is development,
 // set development to true, otherwise false
+var development;
 if (process.env.NODE_ENV === 'development') {
-    var development = true;
+    development = true;
     // Turn on debug info for ap-proj:server
     process.env.DEBUG = 'ap-proj:server';
 } else {
-    var development = false;
+    development = false;
     // Otherwise, don't display debug info
     process.env.DEBUG = '';
 }
@@ -134,7 +135,7 @@ function onListening() {
 }
 
 /**
- * Test socket.io code
+ * Socket.io code
  */
 
 // When the server connects to the client run the function and pass
@@ -150,18 +151,37 @@ io.on('connection', function(socket) {
     // the variable data as the data it receives
     socket.on('location', function(err, pos) {
         // Output the error if there is one
-        if (err) console.error(err);
+        if (err) console.error(userIP + ' : ' + err);
+        
+        getData.getSpeedLimit(pos.lat, pos.lng, function(err, speedLimit) {
+            if (err) {
+                console.error(userIP + ' : ' + err);
+                socket.emit('speedLimit', err, null);
+            } else {
+                socket.emit('speedLimit', null, speedLimit);
+            }
+
+            if (development === true && speedLimit != null) {
+                console.log(userIP + ' : ' + speedLimit);
+            }
+        });
+        
         // Execute getData.js on the location received and pass a function
         // containg an error and the location's elevation variable
         getData.getElevation(pos.lat, pos.lng, function(err, elevation) {
             // Output the error if there is one
-            if (err) console.error(err);
+            if (err) {
+                console.error(userIP + ' : ' + err);
+                socket.emit('elevation', err, null);
+            }
+
             // Output the elevation if in dev mode
-            if (development === true) {
-                console.log(elevation + ' from ' + userIP);
+            if (development === true && elevation !== null) {
+                console.log(userIP + ' : ' + elevation);
             }
             // Emit an elevation event with the location's elevation to the client
-            socket.emit('elevation', elevation);
+            socket.emit('elevation', null, elevation);
         });
+        
     });
 });

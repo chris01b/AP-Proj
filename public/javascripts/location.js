@@ -22,8 +22,26 @@ function doLocation() {
         // Emit the location to the server as a location event
         socket.emit('location', null, pos);
         
+        socket.on('speedLimit', function(err, speedLimit) {
+            if (err) {
+                console.error(err);
+                if (err === 'No speed limit data available') {
+                    $(document).ready(function() {
+                        $('#speedLimitID').text(err);
+                    });
+                }
+            } else {
+                console.log(speedLimit);
+                $(document).ready(function() {
+                    $('#speedLimitID').text(speedLimit);
+                });
+            }
+
+        });
+        
         // Pass the elevation when receiving the elevation event
-        socket.on('elevation', function(elevation) {
+        socket.on('elevation', function(err, elevation) {
+            if (err) console.error(err);
             // When the document is ready, look set the text to items with the id
             // 'elevationID' to have the elevation without its decimal points
             $(document).ready(function() {
