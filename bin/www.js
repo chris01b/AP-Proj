@@ -40,7 +40,7 @@ app.set('port', port);
 // If the enviroment variable NODE_ENV is development,
 // set development to true, otherwise false
 var development;
-if (process.env.NODE_ENV === 'development') {
+if (process.argv[2] === '-d') {
     development = true;
     // Turn on debug info for ap-proj:server
     process.env.DEBUG = 'ap-proj:server';

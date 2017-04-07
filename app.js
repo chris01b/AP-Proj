@@ -20,7 +20,7 @@ var app = express();
 
 // If the enviroment variable NODE_ENV is development,
 // set development to true, otherwise false
-var development = process.env.NODE_ENV === 'development' ? true : false;
+var development = process.argv[2] === '-d' ? true : false;
 
 /**
  * View engine setup
