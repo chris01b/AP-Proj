@@ -5,7 +5,7 @@
  */
 
 // Require and start in the startup of your application:
-require('@google-cloud/debug-agent').start({ allowExpressions: true });
+// require('@google-cloud/debug-agent').start({ allowExpressions: true });
 // No auth necessary if your code is running on Google Cloud Platform.
 
 // ... or, if you are running elsewhere, you can manually provide credentials:
