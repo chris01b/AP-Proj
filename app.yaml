@@ -10,4 +10,4 @@ manual_scaling:
 
 env_variables:
     # Set the enviroment to be in production mode
-    NODE_ENV: 'production'
+    NODE_ENV: "production"

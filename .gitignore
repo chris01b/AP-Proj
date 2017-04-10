@@ -4,19 +4,23 @@ npm-debug.log
 # npm modules
 node_modules/
 
-#################
-### Windows detritus
-##################
+################
+# Windows detritus
+################
 
-## Windows image file caches
+# Windows image file caches
 Thumbs.db
 ehthumbs.db
 
-## Folder config file
+# Folder config file
 Desktop.ini
 
-## Recycle Bin used on file shares
+# Recycle Bin used on file shares
 $RECYCLE.BIN/
 
-## Mac crap
+# Mac crap
 .DS_Store
+
+# Vim swap files
+*.swp
+*.swo
