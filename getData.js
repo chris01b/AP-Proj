@@ -9,8 +9,7 @@ var googleMapsClient = require("@google/maps").createClient({
 // Export the getSpeedLimit function
 exports.getSpeedLimit = function(lat, lng, callback) {
     // create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
-    var query = "[out:json];(way(around:10," + lat + ", " + lng +
-        ")[highway~'^(primary|secondary|tertiary|residential)$'][name][maxspeed];>;);out;";
+    var query = "[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;";
     // Call the Overpass handler with the query. Pass a function with an optional error and response
     queryOverpass(query, function(err, data) {
         // If there is an error, return only the error to the callback function
