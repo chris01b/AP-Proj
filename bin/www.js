@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+"use strict"; // Run in strict mode
 
 /**
  * Module dependencies.
@@ -146,7 +146,7 @@ function onListening() {
 
 // When the server connects to the client run the function and pass
 // socket as the specific client
-io.on("connection", function(socket) {
+io.on("connection", socket => {
     // sets userIP to be the socket's remote address
     var userIP = socket.request.connection.remoteAddress;
     // Output that a user connected
@@ -156,7 +156,7 @@ io.on("connection", function(socket) {
     
     // When the user emits the location event, pass a function with
     // the variable data as the data it receives
-    socket.on("location", function(err, pos) {
+    socket.on("location", (err, pos) => {
         // Output the error if there is one
         if (err) {
             console.error(userIP + " : " + err);
@@ -165,7 +165,7 @@ io.on("connection", function(socket) {
         
         // Execute getData.js on the location received and pass a function
         // containg an error and the location's speed limit variable
-        getData.getSpeedLimit(pos.lat, pos.lng, function(err, speedLimit) {
+        getData.getSpeedLimit(pos.lat, pos.lng, (err, speedLimit) => {
             // Output the error if there is one and pass it to the callback
             if (err) {
                 console.error(userIP + " : " + err);
@@ -182,7 +182,7 @@ io.on("connection", function(socket) {
         
         // Execute getData.js on the location received and pass a function
         // containg an error and the location's elevation variable
-        getData.getElevation(pos.lat, pos.lng, function(err, elevation) {
+        getData.getElevation(pos.lat, pos.lng, (err, elevation) => {
             // Output the error if there is one and pass it to the callback
             if (err) {
                 console.error(userIP + " : " + err);

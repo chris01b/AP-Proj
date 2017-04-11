@@ -1,3 +1,5 @@
+"use strict"; // Run in strict mode
+
 /**
  * Imports
  */
@@ -59,7 +61,7 @@ app.use("/", index);
  * Catch 404 and forward to error handler
  */
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     // Create an error object called "Not Found"
     var err = new Error("Not Found");
     // Make the status of the object 404
@@ -72,7 +74,7 @@ app.use(function(req, res, next) {
  * Error handler
  */
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   // Set the local message to be the error message
   res.locals.message = err.message;
   // Set the local error to be the error object if it is in development, otherwise

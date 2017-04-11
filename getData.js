@@ -1,3 +1,5 @@
+"use strict"; // Run in strict mode
+
 // Import the Overpass API wrapper to get Openstreetmap data
 var queryOverpass = require("query-overpass");
 
@@ -7,7 +9,7 @@ var googleMapsClient = require("@google/maps").createClient({
 });
 
 // Export the getSpeedLimit function
-exports.getSpeedLimit = function(lat, lng, callback) {
+exports.getSpeedLimit = (lat, lng, callback) => {
     // create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
     var query = "[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;";
     // Call the Overpass handler with the query. Pass a function with an optional error and response
@@ -36,7 +38,7 @@ exports.getSpeedLimit = function(lat, lng, callback) {
 };
 
 // Export the getElevation function
-exports.getElevation = function(lat, lng, callback) {
+exports.getElevation = (lat, lng, callback) => {
     // Use the Google Maps client library to return to return the elevation
     // from the longitude and latitude defined in the function
     googleMapsClient.elevation({
@@ -44,7 +46,7 @@ exports.getElevation = function(lat, lng, callback) {
             latitude: lat,
             longitude: lng
         }
-    }, function(err, response) {    // return a function containing an error if there
+    }, (err, response) => {    // return a function containing an error if there
                                     // was one and the elevation
         // only return an error if there was one
         if (err) {

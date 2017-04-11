@@ -1,3 +1,5 @@
+"use strict"; // Run in strict mode
+
 /*eslint-env jquery, browser*/
 /*globals io */
 
@@ -10,7 +12,7 @@ var socket = io.connect(location.origin);
 
 function getLocation() {
     // Pass the browser's location to a function called position
-    navigator.geolocation.getCurrentPosition(function(position) {
+    navigator.geolocation.getCurrentPosition(position => {
         // Create an object called pos containing the latitiude and longitude
         var pos = {
             lat: position.coords.latitude,
@@ -24,14 +26,14 @@ function getLocation() {
         
         // When a speedlimit event happenens, pass a function with an
         // optional error and the speedlimit
-        socket.on("speedLimit", function(err, speedLimit) {
+        socket.on("speedLimit", (err, speedLimit) => {
             // If there is an error, output it in the browser console
             if (err) {
                 console.error(err);
                 // If the error is "No speed limit data available"...
                 if (err === "No speed limit data available") {
                     // Wait until the webpage is ready, then...
-                    $(document).ready(function() {
+                    $(document).ready(() => {
                         // Replace tags with the ID #speedLimitID's text with the error
                         $("#speedLimitID").text(err);
                     });
@@ -40,7 +42,7 @@ function getLocation() {
                 // If there is no error, output the speedLimit in the browser console
                 console.log(speedLimit);
                 // Wait until the webpage is ready, then...
-                $(document).ready(function() {
+                $(document).ready(() => {
                     // Replace tags with the ID #speedLimitID's text with the speed limit
                     $("#speedLimitID").text(speedLimit);
                 });
@@ -49,18 +51,18 @@ function getLocation() {
         });
         
         // Pass the elevation when receiving the elevation event
-        socket.on("elevation", function(err, elevation) {
+        socket.on("elevation", (err, elevation) => {
             if (err) console.error(err);
             // When the document is ready, look set the text to items with the id
             // "elevationID" to have the elevation without its decimal points
-            $(document).ready(function() {
+            $(document).ready(() => {
                 // Replace tags with the ID #elevationID's text with the elebvation
                 // without decimals plus its unit
                 $("#elevationID").text(elevation.toFixed(0) + " meters");
             });
         });
         
-    }, function(err) {
+    }, err => {
         // Otherwise, emit the error to the location event
         socket.emit("location", err, null);
     });
