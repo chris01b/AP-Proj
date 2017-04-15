@@ -1,7 +1,6 @@
 "use strict"; // Run in strict mode
 
-// Import the Overpass API wrapper to get Openstreetmap data
-var queryOverpass = require("query-overpass");
+var getOverpass = require('./overpassData');
 
 // Import the node.js client libraries for google maps as googleMapsClient
 var googleMapsClient = require("@google/maps").createClient({
@@ -11,29 +10,9 @@ var googleMapsClient = require("@google/maps").createClient({
 // Export the getSpeedLimit function
 exports.getSpeedLimit = (lat, lng, callback) => {
     // create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
-    var query = "[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;";
-    // Call the Overpass handler with the query. Pass a function with an optional error and response
-    queryOverpass(query, function(err, data) {
-        // If there is an error, return only the error to the callback function
-        if (err) {
-            callback(err, null);
-        }
-        // Try the following. If there is an error, pass it to the catch function as err
-        try {
-            // If there is nothing in the features field in the response,
-            // throw a custom error that there is no speed limit data available
-            if (data.features.length === 0) {
-                throw "No speed limit data available";
-            }
-            // Set the speedlimit to be the maxspeed field in the tags field in the properties
-            // field from first feature from the response
-            var speedLimit = data.features[0].properties.tags.maxspeed;
-            // Return just the speedlimit as the callback
-            callback(null, speedLimit);
-        } catch(err) {
-            // Return just the error as the callback if one was thrown
-            callback(err, null);
-        }
+    var speedLimit = new getOverpass("[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;");
+    speedLimit.getSpeedLimit((err, data) => {
+        callback(err, data);
     });
 };
 
