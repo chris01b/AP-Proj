@@ -10,6 +10,7 @@ var request = require("request");
 // Create a class 
 class getOverpass {
 
+	// Initialize the query object created with initializing the class
 	constructor (query) {
     	this.query = query;
 	}
@@ -47,7 +48,7 @@ class getOverpass {
 	        	// Otherwise, if there was an error, just call the error back
 	            callback(err);
 	        } else if (res) {
-	        	// if the statuscode was anything other than 200, pass the callback with
+	        	// If the statuscode was anything other than 200, pass the callback with
 	        	// the statuscode
 	            callback({
 	                message: "Request failed: HTTP " + res.statusCode,
@@ -62,10 +63,13 @@ class getOverpass {
 	    });
 	}
 
+	// This function passes a callback
 	getSpeedLimit (callback) {
+		// Use the getRaw function from the initialized class. Pass an err and data through a functon
 		this.getRaw((err, data) => {
 			// If there is an error, return only the error to the callback function
 	        if (err) {
+	        	// Throw just an error with the callback
 	            callback(err, null);
 	        }
 	        // Try the following. If there is an error, pass it to the catch function as err

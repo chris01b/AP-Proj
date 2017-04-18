@@ -9,7 +9,7 @@ var googleMapsClient = require("@google/maps").createClient({
 
 // Export the getSpeedLimit function
 exports.getSpeedLimit = (lat, lng, callback) => {
-    // create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
+    // Create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
     var speedLimit = new getOverpass("[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;");
     speedLimit.getSpeedLimit((err, data) => {
         callback(err, data);
@@ -25,8 +25,8 @@ exports.getElevation = (lat, lng, callback) => {
             latitude: lat,
             longitude: lng
         }
-    }, (err, response) => {    // return a function containing an error if there
-                                    // was one and the elevation
+    }, (err, response) => { // Return a function containing an error if there
+                            // was one and the elevation
         // only return an error if there was one
         if (err) {
             callback(err, null);
