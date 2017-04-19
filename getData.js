@@ -16,6 +16,7 @@ exports.getSpeedLimit = (lat, lng, callback) => {
     speedLimit.getSpeedLimit((err, data) => {
         callback(err, data);
         averageArr.push(data);
+        console.log(averageArr);
     });
 };
 
