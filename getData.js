@@ -16,6 +16,7 @@ exports.getSpeedLimit = (lat, lng, callback) => {
     speedLimit.getSpeedLimit((err, data) => {
         callback(err, data, speedLimit.getAverageSpeedLimit());
         averageArr.push(data);
+        exports.averageArr;
     });
 };
 
@@ -44,5 +45,3 @@ exports.getElevation = (lat, lng, callback) => {
         }
     });
 };
-
-exports.averageArr;
