@@ -7,12 +7,15 @@ var googleMapsClient = require("@google/maps").createClient({
     key: "AIzaSyDJUarszRbkOE-7jmdWmU9SKEKduoLFxYY" // The API key for the Google Maps API
 });
 
+var averageArr = [];
+
 // Export the getSpeedLimit function
 exports.getSpeedLimit = (lat, lng, callback) => {
     // Create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
     var speedLimit = new getOverpass("[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;");
     speedLimit.getSpeedLimit((err, data) => {
         callback(err, data);
+        averageArr.push(data);
     });
 };
 
@@ -41,3 +44,6 @@ exports.getElevation = (lat, lng, callback) => {
         }
     });
 };
+
+exports.getAverage = (speedLimitArr) => {
+}
