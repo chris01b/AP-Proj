@@ -99,7 +99,6 @@ class getOverpass {
         this.average = speedLimitArr.reduce((acc, cur) => acc + cur, 0);
         console.log(this.average);
     }
-    
 }
 
 // Export the getOverpass class so that other files can use it

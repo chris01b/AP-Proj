@@ -165,7 +165,7 @@ io.on("connection", socket => {
         
         // Execute getData.js on the location received and pass a function
         // containg an error and the location's speed limit variable
-        getData.getSpeedLimit(pos.lat, pos.lng, (err, speedLimit) => {
+        getData.getSpeedLimit(pos.lat, pos.lng, (err, speedLimit, speedLimitAverage) => {
             // Output the error if there is one and pass it to the callback
             if (err) {
                 console.error(userIP + " : " + err);
@@ -177,6 +177,7 @@ io.on("connection", socket => {
             // Output the speed limit if in dev mode
             if (development === true && speedLimit != undefined) {
                 console.log(userIP + " : " + speedLimit);
+                console.log(speedLimitAverage);
             }
         });
         
