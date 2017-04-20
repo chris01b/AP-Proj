@@ -19,7 +19,7 @@ var getData = require("../getData")
 
 // set port to be the PORT enviroment variable or 8080 if
 // PORT is not a valid number
-var port = normalizePort(process.env.PORT || "8080");
+var port = normalizePort(process.env.PORT || "443");
 // set the port variable to be used as the port in the app
 app.set("port", port);
 
