@@ -168,15 +168,16 @@ io.on("connection", socket => {
         getData.getSpeedLimit(pos.lat, pos.lng, (err, speedLimit, speedLimitAverage) => {
             // Output the error if there is one and pass it to the callback
             if (err) {
-                console.error(userIP + " : " + err);
-                socket.emit("speedLimit", err);
+                console.error(userIP + " err: " + err);
+                console.error(userIP + " SpeedLimitAverage: " + speedLimitAverage);
+                socket.emit("speedLimit", err, null, speedLimitAverage);
             } else {
                 socket.emit("speedLimit", null, speedLimit, speedLimitAverage);
             }
             
             // Output the speed limit if in dev mode
             if (development === true && speedLimit != undefined) {
-                console.log(userIP + " : " + speedLimit);
+                console.log(userIP + " speedLimit: " + speedLimit);
             }
         });
         
@@ -195,7 +196,7 @@ io.on("connection", socket => {
             
             // Output the elevation if in dev mode
             if (development === true && elevation !== null) {
-                console.log(userIP + " : " + elevation);
+                console.log(userIP + " elevation: " + elevation);
             }
         });
         

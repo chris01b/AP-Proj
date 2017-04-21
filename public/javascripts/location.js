@@ -69,8 +69,8 @@ function getLocation() {
 
 // If the browser has geolocation capabilites, run the doLocation function every 2 seconds
 if (navigator.geolocation) {
-    // Run location repeatedly every 2 seconds
-    setInterval(getLocation, 2000);
+    // Run location repeatedly every 3 seconds
+    setInterval(getLocation, 3000);
 } else {
     // Otherwise, emit an error to the location event that it doesn"t support geolocation
     socket.emit("location", "Browser doesn't support Geolocation", null);

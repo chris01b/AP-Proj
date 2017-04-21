@@ -95,15 +95,19 @@ class getOverpass {
 
     // Get the average of all the speed limits
     getAverageSpeedLimit(callback) {
-        var speedLimitArr = getData.averageArr;
-        console.log(speedLimitArr);
-        var speedLimitTotal = speedLimitArr.reduce((acc, cur) => {
+        var uncutSpeed = getData.averageArr;
+        var cutSpeed = [];
+        for (var i in uncutSpeed) {
+            var speed = uncutSpeed[i].replace(/\D/g,'');
+            cutSpeed.push(parseInt(speed));
+        }
+        var speedLimitTotal = cutSpeed.reduce((acc, cur) => {
             if (cur !== -1) {
                 return acc + cur;
             }
             return acc;
         }, 0);
-        this.average = speedLimitTotal / speedLimitArr.length;
+        this.average = speedLimitTotal / uncutSpeed.length;
         return this.average;
     }
 }
