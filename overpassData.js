@@ -6,6 +6,7 @@ var osmtogeojson = require("osmtogeojson");
 var querystring = require("querystring");
 // Import request for API calls
 var request = require("request");
+var getData = require("./getData");
 
 // Create a class 
 class getOverpass {
@@ -13,6 +14,7 @@ class getOverpass {
 	// Initialize the query object created with initializing the class
 	constructor (query) {
     	this.query = query;
+        this.average = 0;
 	}
 
 	/**
@@ -90,6 +92,24 @@ class getOverpass {
 	        }
 		});
 	}
+
+    // Get the average of all the speed limits
+    getAverageSpeedLimit(callback) {
+        var uncutSpeed = getData.averageArr;
+        var cutSpeed = [];
+        for (var i in uncutSpeed) {
+            var speed = uncutSpeed[i].replace(/\D/g,'');
+            cutSpeed.push(parseInt(speed));
+        }
+        var speedLimitTotal = cutSpeed.reduce((acc, cur) => {
+            if (cur !== -1) {
+                return acc + cur;
+            }
+            return acc;
+        }, 0);
+        this.average = speedLimitTotal / uncutSpeed.length;
+        return this.average;
+    }
 }
 
 // Export the getOverpass class so that other files can use it
