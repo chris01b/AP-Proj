@@ -11,8 +11,8 @@
 
 ### Run
 
-`npm start`
+`[sudo] npm start`
 
 ### Run in debug mode
 
-`npm test`
+`[sudo] npm test`
