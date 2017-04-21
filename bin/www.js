@@ -17,9 +17,9 @@ var getData = require("../getData")
  * Get port from environment and store in Express.
  */
 
-// set port to be the PORT enviroment variable or 8080 if
+// set port to be the PORT enviroment variable or 443 if
 // PORT is not a valid number
-var port = normalizePort(process.env.PORT || "8080");
+var port = normalizePort(process.env.PORT || "443");
 // set the port variable to be used as the port in the app
 app.set("port", port);
 
@@ -169,15 +169,14 @@ io.on("connection", socket => {
             // Output the error if there is one and pass it to the callback
             if (err) {
                 console.error(userIP + " : " + err);
-                socket.emit("speedLimit", err, null);
+                socket.emit("speedLimit", err);
             } else {
-                socket.emit("speedLimit", null, speedLimit);
+                socket.emit("speedLimit", null, speedLimit, speedLimitAverage);
             }
             
             // Output the speed limit if in dev mode
             if (development === true && speedLimit != undefined) {
                 console.log(userIP + " : " + speedLimit);
-                console.log(speedLimitAverage);
             }
         });
         

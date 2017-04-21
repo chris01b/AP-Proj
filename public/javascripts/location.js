@@ -26,28 +26,27 @@ function getLocation() {
         
         // When a speedlimit event happenens, pass a function with an
         // optional error and the speedlimit
-        socket.on("speedLimit", (err, speedLimit) => {
+        socket.on("speedLimit", (err, speedLimit, speedLimitAverage) => {
+            console.log(speedLimitAverage);
             // If there is an error, output it in the browser console
+            function replaceText(toPlace, tag) {
+                $(document).ready(() => {
+                    $(tag).text(toPlace);
+                });
+            }
+
             if (err) {
                 console.error(err);
                 // If the error is "No speed limit data available"...
                 if (err === "No speed limit data available") {
-                    // Wait until the webpage is ready, then...
-                    $(document).ready(() => {
-                        // Replace tags with the ID #speedLimitID's text with the error
-                        $("#speedLimitID").text(err);
-                    });
+                    replaceText(err, "#speedLimitID");
                 }
             } else {
                 // If there is no error, output the speedLimit in the browser console
                 console.log(speedLimit);
-                // Wait until the webpage is ready, then...
-                $(document).ready(() => {
-                    // Replace tags with the ID #speedLimitID's text with the speed limit
-                    $("#speedLimitID").text(speedLimit);
-                });
+                replaceText(speedLimit, "#speedLimitID");
             }
-
+            replaceText(speedLimitAverage, "#averageSpeedID");
         });
         
         // Pass the elevation when receiving the elevation event
