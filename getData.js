@@ -22,7 +22,6 @@ exports.getSpeedLimit = (lat, lng, callback) => {
             // Otherwise, add the speed limit to the list of all speed limits
             averageArr.push(data);
         }
-        console.log(averageArr);
         // Pass the error, speed liimit, and array of all speedlimits to the callback
         callback(err, data, speedLimit.getAverageSpeedLimit());
     });
