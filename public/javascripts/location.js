@@ -28,24 +28,31 @@ function getLocation() {
         // optional error and the speedlimit
         socket.on("speedLimit", (err, speedLimit, speedLimitAverage) => {
             console.log(speedLimitAverage);
-            // If there is an error, output it in the browser console
+            // Create a function to replace the text sections on the webpage
             function replaceText(toPlace, tag) {
+                // When the document is ready...
                 $(document).ready(() => {
+                    // When the tag is ready, replace its text whith the toPlace variable
                     $(tag).text(toPlace);
                 });
             }
 
+            // If there is an error...
             if (err) {
+                // log it
                 console.error(err);
                 // If the error is "No speed limit data available"...
                 if (err === "No speed limit data available") {
+                    // Replace the speed limit id with the error
                     replaceText(err, "#speedLimitID");
                 }
             } else {
                 // If there is no error, output the speedLimit in the browser console
                 console.log(speedLimit);
+                // and replace the speed limit ID with the speed limit
                 replaceText(speedLimit, "#speedLimitID");
             }
+            // Replace the speed limit average text with the speed limit average
             replaceText(speedLimitAverage, "#averageSpeedID");
         });
         
