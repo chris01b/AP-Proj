@@ -13,16 +13,21 @@ var averageArr = [];
 exports.getSpeedLimit = (lat, lng, callback) => {
     // Create an Overpass QL query to get road data for roads 10 meters around the coordinates that has a speedlimit set
     var speedLimit = new getOverpass("[out:json];(way(around:10," + lat + ", " + lng + ")[highway][maxspeed];>;);out;");
+    // Get the speed limit from the overpassData file
     speedLimit.getSpeedLimit((err, data) => {
+        // If there was no speed limit data, pass a -1
         if (data == undefined) {
             averageArr.push("-1");
         } else {
+            // Otherwise, add the speed limit to the list of all speed limits
             averageArr.push(data);
         }
+        // Pass the error, speed liimit, and array of all speedlimits to the callback
         callback(err, data, speedLimit.getAverageSpeedLimit());
     });
 };
 
+// Export the list of all speed limits
 exports.averageArr = averageArr;
 
 // Export the getElevation function

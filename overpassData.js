@@ -6,6 +6,7 @@ var osmtogeojson = require("osmtogeojson");
 var querystring = require("querystring");
 // Import request for API calls
 var request = require("request");
+// Import getData functions
 var getData = require("./getData");
 
 // Create a class 
@@ -13,7 +14,9 @@ class getOverpass {
 
 	// Initialize the query object created with initializing the class
 	constructor (query) {
+        // Set query to be the class's variable
     	this.query = query;
+        // Initialize the average class variable
         this.average = 0;
 	}
 
@@ -50,8 +53,7 @@ class getOverpass {
 	        	// Otherwise, if there was an error, just call the error back
 	            callback(err);
 	        } else if (res) {
-	        	// If the statuscode was anything other than 200, pass the callback with
-	        	// the statuscode
+	        	// If the statuscode was anything other than 200, pass the callback with the statuscode
 	            callback({
 	                message: "Request failed: HTTP " + res.statusCode,
 	                statusCode: res.statusCode
@@ -95,19 +97,27 @@ class getOverpass {
 
     // Get the average of all the speed limits
     getAverageSpeedLimit(callback) {
+        // set uncutSpeed to be the array of all recorded speed limits
         var uncutSpeed = getData.averageArr;
+        // Initialize cutSpeed variable
         var cutSpeed = [];
+        // For every string in the array... 
         for (var i in uncutSpeed) {
+            // remove all non-numbers in the string
             var speed = uncutSpeed[i].replace(/\D/g,'');
+            // convert the string to a number and add it to the end of cutSpeed
             cutSpeed.push(parseInt(speed));
         }
+        // Add up all the numbers in cutSpeed
         var speedLimitTotal = cutSpeed.reduce((acc, cur) => {
+            // If the current speed limit was found, add it with the previous and return it
             if (cur !== -1) {
                 return acc + cur;
             }
-            return acc;
         }, 0);
+        // Set the average speed limit
         this.average = speedLimitTotal / uncutSpeed.length;
+        // And return it
         return this.average;
     }
 }
