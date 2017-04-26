@@ -108,15 +108,19 @@ class getOverpass {
             // convert the string to a number and add it to the end of cutSpeed
             cutSpeed.push(parseInt(speed));
         }
+        var cutSpeedLength = 0;
         // Add up all the numbers in cutSpeed
         var speedLimitTotal = cutSpeed.reduce((acc, cur) => {
             // If the current speed limit was found, add it with the previous and return it
-            if (cur !== -1) {
+            if (cur !== 555) {
+                cutSpeedLength++;
                 return acc + cur;
+            } else {
+                return acc;
             }
         }, 0);
         // Set the average speed limit
-        this.average = speedLimitTotal / uncutSpeed.length;
+        this.average = speedLimitTotal / cutSpeedLength;
         // And return it
         return this.average;
     }

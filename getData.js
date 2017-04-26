@@ -17,7 +17,7 @@ exports.getSpeedLimit = (lat, lng, callback) => {
     speedLimit.getSpeedLimit((err, data) => {
         // If there was no speed limit data, pass a -1
         if (data == undefined) {
-            averageArr.push("-1");
+            averageArr.push("555");
         } else {
             // Otherwise, add the speed limit to the list of all speed limits
             averageArr.push(data);
