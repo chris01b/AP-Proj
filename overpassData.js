@@ -28,25 +28,25 @@ class getOverpass {
 	// This function passes a callback
 	getRaw (callback) {
 		// set the request options for the API
-    	var reqOptions = {
-    		// Make the header show up as an appication
-	        headers: {
-	            "content-type": "application/x-www-form-urlencoded"
-	        },
-	        	// Make the body be the URI-encoded query
-	        	body: querystring.stringify({ data: this.query })
-    	};
-    	// Execute the API call using the request options
-    	// Pass a function with the request and its error
-	    request.post("http://overpass-api.de/api/interpreter", reqOptions, (err, res, body) => {
-	        var geojson;
+    		var reqOptions = {
+			// Make the header show up as an appication
+			headers: {
+			    "content-type": "application/x-www-form-urlencoded"
+			},
+				// Make the body be the URI-encoded query
+				body: querystring.stringify({ data: this.query })
+		};
+		// Execute the API call using the request options
+		// Pass a function with the request and its error
+		request.post("http://overpass-api.de/api/interpreter", reqOptions, (err, res, body) => {
+		var geojson;
 
-	        // If there is no error, and there is a 200 OK response do the following
-	        if (!err && res.statusCode === 200) {
-	        	// Set geojson to be the converted OSM to JSON response from the api call
-	            geojson = osmtogeojson(JSON.parse(body), {
-	                flatProperties: false
-	            });
+		// If there is no error, and there is a 200 OK response do the following
+		if (!err && res.statusCode === 200) {
+			// Set geojson to be the converted OSM to JSON response from the api call
+		    geojson = osmtogeojson(JSON.parse(body), {
+			flatProperties: false
+		    });
 	            // Return the json output as the callback with no error
 	            callback(undefined, geojson);
 	        } else if (err) {
